@@ -1,10 +1,16 @@
+import { useTranslations } from "next-intl";
+
 export default function DashboardOverviewPage() {
+  const t = useTranslations("HomePage");
+
   return (
     <div className="flex flex-col gap-6">
       {/* 1. رأس الصفحة (Overview & General KPIs) */}
       <section className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold text-foreground">Overview</h1>
+          <h1 className="text-2xl font-bold text-foreground">
+            {t("overview")}
+          </h1>
           {/* هنا هيتحط زرار الـ Dropdown بتاع General KPIs */}
         </div>
         {/* هنا هيتحط زرار Export All */}

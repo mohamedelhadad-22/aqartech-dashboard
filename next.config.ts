@@ -1,9 +1,21 @@
 import type { NextConfig } from "next";
 import tailwindcss from "@tailwindcss/vite";
+import createNextIntlPlugin from "next-intl/plugin";
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  plugins: [tailwindcss()],
+  // plugins: [createNextIntlPlugin("./i18n/request.ts"), tailwindcss()],
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**",
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
