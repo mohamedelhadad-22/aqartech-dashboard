@@ -1,45 +1,66 @@
+// src/components/layout/AppSidebar.tsx
 "use client";
-import { Building, Home, Logs } from "lucide-react";
-import { HomeIcon } from "@/components/icons/HomeIcon";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import navigation from "@/constants/navigation";
 
-export default function Sidebar() {
+import { usePathname, Link } from "@/i18n/navigation";
+import NAV_ITEMS from "@/constants/navigation";
+import LanguageToggle from "@/components/Header/LanguageToggle"; // مسار زرار اللغات اللي عملناه
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+
+export default function AppSidebar() {
   const pathname = usePathname();
 
-  const NavLink = navigation.map((link) => {
-    const isActive = pathname === link.path;
-
-    const Icon = link.icon;
-
-    return (
-      <li key={link.path}>
-        <Link
-          href={link.path}
-          className={`flex items-center gap-2 rounded-md px-4 py-2 transition-all duration-300 ease-in-out
-             ${
-               isActive
-                 ? "bg-sidebar-primary text-sidebar-primary-foreground font-medium"
-                 : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-             }`}
-        >
-          <Icon className="h-5 w-5" />
-          <span>{link.title}</span>
-        </Link>
-      </li>
-    );
-  });
-
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-gray-200 bg-white">
-      <div className="flex h-16 items-center justify-between border-b border-gray-200 p-4">
-        <span className="text-xl font-bold">Aqartech</span>
-        <Logs className="cursor-pointer" />
-      </div>
-      <nav className="flex-1 overflow-y-auto p-4">
-        <ul className="space-y-2">{NavLink}</ul>
-      </nav>
-    </aside>
+    <Sidebar variant="sidebar" collapsible="icon">
+      {/* 1. رأس السايد بار (اللوجو) */}
+      <SidebarHeader className="flex items-center justify-center py-4">
+        <h2 className="text-2xl font-bold text-primary group-data-[collapsible=icon]:hidden">
+          AqarTech
+        </h2>
+        <h2 className="hidden text-xl font-bold text-primary group-data-[collapsible=icon]:block">
+          AQ
+        </h2>
+      </SidebarHeader>
+
+      {/* 2. محتوى السايد بار (الروابط) */}
+      <SidebarContent>
+        <SidebarMenu>
+          {NAV_ITEMS.map((item) => {
+            // التحقق من الرابط النشط
+            const isActive = pathname === item.path;
+
+            return (
+              <SidebarMenuItem key={item.path}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={isActive}
+                  tooltip={item.title} // عشان لما يكون مقفول (Icon mode) يظهر اسم اللينك
+                  className="transition-all duration-200"
+                >
+                  {/* استخدمنا Link بتاع next-intl عشان يحافظ على اللغة في الرابط */}
+                  <Link href={item.path} className="flex items-center gap-3">
+                    <item.icon className="size-5" />
+                    <span>{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarContent>
+
+      {/* 3. ذيل السايد بار (زرار اللغات) */}
+      <SidebarFooter className="flex items-center justify-center p-4">
+        {/* حطينا زرار اللغات هنا عشان يكون سهل الوصول ليه */}
+        <LanguageToggle />
+      </SidebarFooter>
+    </Sidebar>
   );
 }
