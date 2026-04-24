@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { getMessages } from "next-intl/server";
 
 import "./globals.css";
 
@@ -21,18 +22,27 @@ export const metadata: Metadata = {
   description: "Advanced Real Estate & Facility Management System",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  const direction = locale === "ar" ? "rtl" : "ltr";
+  const messages = await getMessages();
+
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={direction}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="h-full flex flex-col bg-background text-foreground">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
