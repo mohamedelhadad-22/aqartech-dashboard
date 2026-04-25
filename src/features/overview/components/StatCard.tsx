@@ -1,64 +1,92 @@
-import { ArrowDownRight, ArrowUpRight, type LucideIcon } from "lucide-react";
+"use client";
+
+import { useTranslations } from "next-intl";
+import { Line, LineChart, ResponsiveContainer, Tooltip } from "recharts";
 import { cn } from "@/lib/utils";
 
 interface StatCardProps {
   title: string;
   value: string | number;
-  trend?: "up" | "down" | "neutral";
-  percentage?: string;
-  icon?: LucideIcon;
+  subtitle: string;
+  chartData: { name: string; actual: number; expected: number }[];
   className?: string;
 }
 
 export default function StatCard({
   title,
   value,
-  trend,
-  percentage,
-  icon: Icon,
+  subtitle,
+  chartData,
   className,
 }: StatCardProps) {
-  const isPositive = trend === "up";
-  const isNegative = trend === "down";
+  const t = useTranslations("overview");
 
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-sm transition-all hover:shadow-md",
+        "flex items-center justify-between rounded-xl border border-border bg-card p-6 shadow-sm",
         className,
       )}
     >
-      {/* الجزء العلوي: العنوان والأيقونة */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
-        {Icon && (
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-600">
-            <Icon className="h-5 w-5" />
-          </div>
-        )}
+      {/* الجانب الأيمن (في الإنجليزي) / الأيسر (في العربي): النصوص */}
+      <div className="flex flex-col gap-2">
+        <h3 className="text-sm font-semibold text-foreground">{title}</h3>
+        {/* الرقم باللون البنفسجي المميز زي التصميم */}
+        <span className="text-3xl font-bold text-indigo-600">{value}</span>
+        <span className="text-xs text-muted-foreground">{subtitle}</span>
       </div>
 
-      {/* الجزء السفلي: الرقم ونسبة التغيير */}
-      <div className="flex items-baseline gap-2">
-        <span className="text-3xl font-bold text-foreground">{value}</span>
+      {/* الجانب المعاكس: الرسم البياني المصغر (Sparkline) */}
+      <div className="flex flex-col items-center justify-end w-[140px] h-[90px]">
+        {/* حطينا ltr عشان اتجاه الشارت ميبُظش في العربي */}
+        <div dir="ltr" className="h-[65px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={chartData}>
+              {/* الخط الأساسي (البنفسجي) */}
+              <Line
+                type="monotone"
+                dataKey="actual"
+                stroke="#6366f1"
+                strokeWidth={2}
+                dot={false}
+              />
+              {/* الخط المتوقع (البرتقالي) */}
+              <Line
+                type="monotone"
+                dataKey="expected"
+                stroke="#f59e0b"
+                strokeWidth={2}
+                dot={false}
+              />
+              {/* Tooltip بسيط بيظهر لما تقف بالماوس */}
+              <Tooltip
+                contentStyle={{
+                  borderRadius: "8px",
+                  fontSize: "12px",
+                  padding: "4px 8px",
+                }}
+                cursor={{
+                  stroke: "#cbd5e1",
+                  strokeWidth: 1,
+                  strokeDasharray: "3 3",
+                }}
+                labelStyle={{ display: "none" }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
 
-        {trend && percentage && (
-          <span
-            className={cn(
-              "flex items-center text-sm font-medium",
-              isPositive
-                ? "text-emerald-600"
-                : isNegative
-                  ? "text-red-600"
-                  : "text-gray-500",
-            )}
-          >
-            {/* استخدام me-1 عشان المسافة تظبط عربي وإنجليزي أوتوماتيك */}
-            {isPositive && <ArrowUpRight className="me-1 h-4 w-4" />}
-            {isNegative && <ArrowDownRight className="me-1 h-4 w-4" />}
-            {percentage}
+        {/* الـ Legend اللي تحت الرسم البياني زي التصميم */}
+        <div className="flex items-center gap-3 mt-2 text-[10px] font-medium text-muted-foreground">
+          <span className="flex items-center gap-1.5">
+            <div className="h-2 w-2 rounded-[2px] bg-indigo-500" />
+            {t("actual")}
           </span>
-        )}
+          <span className="flex items-center gap-1.5">
+            <div className="h-2 w-2 rounded-[2px] bg-amber-500" />
+            {t("expected")}
+          </span>
+        </div>
       </div>
     </div>
   );

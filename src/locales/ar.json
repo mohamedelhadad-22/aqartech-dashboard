@@ -4,7 +4,34 @@
     "rentalStats": "إحصائيات التأجير",
     "averageCalls": "متوسط المكالمات",
     "propertiesForSale": "عقارات للبيع",
-    "propertiesForRent": "عقارات للإيجار"
+    "propertiesForRent": "عقارات للإيجار",
+    "leasingActivity": "نشاط التأجير للـ 7 أيام القادمة",
+    "occupancyRate": "معدل الإشغال",
+    "occupied": "مشغول",
+    "vacant": "شاغر",
+    "growthSubtitle": "نمو {percentage}% هذا الشهر",
+    "actual": "الفعلي",
+    "expected": "المتوقع",
+    "salesPerformance": "أداء المبيعات",
+    "table": {
+      "propertiesPurchases": "مشتريات العقارات",
+      "unitSold": "الوحدات المباعة",
+      "avgListPrice": "متوسط سعر العرض",
+      "avgSalesPrice": "متوسط سعر البيع",
+      "listToSales": "نسبة العرض للبيع",
+      "sar": "ر.س",
+      "months": {
+        "jan": "يناير",
+        "feb": "فبراير",
+        "mar": "مارس",
+        "apr": "أبريل",
+        "may": "مايو",
+        "jun": "يونيو",
+        "jul": "يوليو",
+        "aug": "أغسطس",
+        "sep": "سبتمبر"
+      }
+    }
   },
   "Sidebar": {
     "Overview": "نظرة عامة",
