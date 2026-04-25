@@ -1,6 +1,20 @@
 {
-  "HomePage": {
-    "title": "Hello world!",
-    "overview": "Overview"
+  "overview": {
+    "overview": "Overview",
+    "rentalStats": "Rental Stats",
+    "averageCalls": "Average Calls Made",
+    "propertiesForSale": "Properties for Sales",
+    "propertiesForRent": "Properties for Rent"
+  },
+  "Sidebar": {
+    "Overview": "Overview",
+    "facilityUtilization": "Facility Utilization",
+    "staffPerformance": "Staff Performance",
+    "riskManagement": "Risk Management",
+    "strategicPlanning": "Strategic Planning",
+    "complianceRegulations": "Compliance & Regulations",
+    "Notifications": "Notifications",
+    "Profile": "Profile",
+    "Settings": "Settings"
   }
 }

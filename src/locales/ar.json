@@ -1,6 +1,20 @@
 {
-  "HomePage": {
-    "title": "!مرحبا بالعالم",
-    "overview": "نظرة عامة"
+  "overview": {
+    "overview": "نظرة عامة",
+    "rentalStats": "إحصائيات التأجير",
+    "averageCalls": "متوسط المكالمات",
+    "propertiesForSale": "عقارات للبيع",
+    "propertiesForRent": "عقارات للإيجار"
+  },
+  "Sidebar": {
+    "Overview": "نظرة عامة",
+    "facilityUtilization": "استغلال المرافق",
+    "staffPerformance": "أداء الموظفين",
+    "riskManagement": "إدارة المخاطر",
+    "strategicPlanning": "التخطيط الاستراتيجي",
+    "complianceRegulations": "الامتثال واللوائح",
+    "Notifications": "الإشعارات",
+    "Profile": "الملف الشخصي",
+    "Settings": "الإعدادات"
   }
 }

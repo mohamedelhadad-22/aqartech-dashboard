@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+// import Header from "@/components/layout/Header";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -26,7 +26,7 @@ export default async function DashboardLayout({
             <AppSidebar />
 
             <div className="flex flex-1 flex-col overflow-hidden">
-              <Header />
+              {/* <Header /> */}
               <main className="flex-1 overflow-auto bg-gray-50/50 p-6">
                 {children}
               </main>

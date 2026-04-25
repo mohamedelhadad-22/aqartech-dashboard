@@ -1,31 +1,48 @@
+"use client";
+
 import { useTranslations } from "next-intl";
+import StatCard from "@/features/overview/components/StatCard";
+import { Building2, Home, PhoneCall } from "lucide-react";
 
 export default function DashboardOverviewPage() {
-  const t = useTranslations("HomePage");
+  const t = useTranslations("overview");
 
   return (
     <div className="flex flex-col gap-6">
-      {/* 1. رأس الصفحة (Overview & General KPIs) */}
       <section className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold text-foreground">
-            {t("overview")}
-          </h1>
-          {/* هنا هيتحط زرار الـ Dropdown بتاع General KPIs */}
-        </div>
-        {/* هنا هيتحط زرار Export All */}
+        <h1 className="text-3xl font-bold text-foreground">{t("overview")}</h1>
       </section>
 
-      {/* 2. قسم الإحصائيات (Rental Stats) */}
       <section>
-        <h2 className="text-lg font-semibold mb-4 text-foreground">
-          Rental Stats
+        <h2 className="mb-4 text-lg font-semibold text-foreground">
+          {t("rentalStats")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* هنا هنرص الـ StatCards بتاعتنا */}
-          {/* <StatCard title="Average Calls Made" value="409" ... /> */}
-          {/* <StatCard title="Properties for Sales" value="826" ... /> */}
-          {/* <StatCard title="Properties for Rent" value="247,971" ... /> */}
+
+        {/* شبكة متجاوبة: كارت واحد في الموبايل، كارتين في التابلت، 3 في الشاشات الكبيرة */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <StatCard
+            title={t("averageCalls")}
+            value="409"
+            trend="up"
+            percentage="12%"
+            icon={PhoneCall}
+          />
+
+          <StatCard
+            title={t("propertiesForSale")}
+            value="826"
+            trend="down"
+            percentage="4.3%"
+            icon={Home}
+          />
+
+          <StatCard
+            title={t("propertiesForRent")}
+            value="247,971"
+            trend="up"
+            percentage="21.5%"
+            icon={Building2}
+          />
         </div>
       </section>
 

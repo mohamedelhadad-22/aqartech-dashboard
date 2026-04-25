@@ -12,27 +12,27 @@ const NAV_ITEMS = [
     icon: HomeIcon,
   },
   {
-    title: "Facility Utilization",
+    title: "facilityUtilization",
     path: "/facilities",
     icon: FacilityUtilizationIcon,
   },
   {
-    title: "Staff Performance",
+    title: "staffPerformance",
     path: "/staff-performance",
     icon: StaffPerformanceIcon,
   },
   {
-    title: "Risk Management",
+    title: "riskManagement",
     path: "/risk-management",
     icon: RiskManagementIcon,
   },
   {
-    title: "Strategic Planning",
+    title: "strategicPlanning",
     path: "/strategic-planning",
     icon: StrategicPlanningIcon,
   },
   {
-    title: "Compliance & Regulations",
+    title: "complianceRegulations",
     path: "/compliance-regulations",
     icon: ComplianceRegulationsIcon,
   },
